@@ -1,0 +1,41 @@
+package lab_3;
+interface LevelTemplate extends Cloneable {
+    LevelTemplate clone();
+    void customLevel(String terrain, String obstacles, String enemies);
+}
+class Level implements LevelTemplate {
+    private String terrain;
+    private String obstacles;
+    private String enemies;
+
+    public Level(String terrain, String obstacles, String enemies) {
+        this.terrain = terrain;
+        this.obstacles = obstacles;
+        this.enemies = enemies;
+    }
+    @Override
+    public LevelTemplate clone() {
+        try {
+            return (LevelTemplate) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }}
+    @Override
+    public void customLevel(String terrain, String obstacles, String enemies) {
+        // Logic to customize the level
+        this.terrain = terrain;
+        this.obstacles = obstacles;
+        this.enemies = enemies;
+        System.out.println("the terrain " + terrain + ",the obstacles " + obstacles + ",the enemies " + enemies);
+    }}
+
+public class LevelTool {
+    public static void main(String[] args) {
+        LevelTemplate levelprot = new Level("Default terrain", "Default obstacles", "Default enemies");
+
+        LevelTemplate level1 = levelprot.clone();
+        level1.customLevel("Buldings","walls","zombies");
+        LevelTemplate level2 = levelprot.clone();
+        level2.customLevel("House","Dors","vampires");
+    }}
